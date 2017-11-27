@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.iOS;
 
+[RequireComponent(typeof(TinyHandFactory))]
 public class TinyHandManager : Singleton<TinyHandManager>
 {
 
@@ -12,8 +13,10 @@ public class TinyHandManager : Singleton<TinyHandManager>
 
     private void Awake()
     {
+        if (_tinyHandFactory == null)
+            _tinyHandFactory = gameObject.AddComponent<TinyHandFactory>();
+
         _tinyHandList = new List<GameObject>();
-        _tinyHandFactory = gameObject.AddComponent<TinyHandFactory>();
 
         InputManager.Instance.ARTouchBeganUpdateEvent += OnTouchBegan;
     }

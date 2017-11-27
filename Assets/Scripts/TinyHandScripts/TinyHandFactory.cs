@@ -22,6 +22,8 @@ public class TinyHandFactory : MonoBehaviour {
 
     private GameObject ConstructTinyHand () {
         var hand = Instantiate(_tinyHandPrefab);
+        ApplyRandomYRotation(hand);
+
         var tweet = Instantiate(_tweetContainerPrefab);
         var pos = tweet.transform.position;
         tweet.transform.position = new Vector3 (pos.x, pos.y + _heightFudgeFactor, pos.z);
@@ -36,5 +38,12 @@ public class TinyHandFactory : MonoBehaviour {
         tweet.transform.SetParent(finalGO.transform);
 
         return finalGO;
+    }
+
+    private void ApplyRandomYRotation (GameObject go) {
+        var randRot = Random.Range(0, 360);
+        Quaternion finalRotation = Quaternion.AngleAxis(randRot, Vector3.up);
+
+        go.transform.rotation = finalRotation;
     }
 }
