@@ -2,6 +2,8 @@
 
 ARkit app that lets you spawn cute, little Trump hands in the real world with some of his infamous tweets floating above them.
 
+![Alt text](/MediaContent/exImage.jpg "Optional Title")
+
 ## Side Info
 
 This project was created as a demonstration on how to use ARkit + Unity
