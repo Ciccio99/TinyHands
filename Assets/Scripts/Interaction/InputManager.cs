@@ -68,8 +68,8 @@ public class InputManager : Singleton<InputManager> {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse touch!"); 
             Touch fakeTouch = new Touch();
+            fakeTouch.phase = TouchPhase.Began;
             fakeTouch.position = Input.mousePosition;
             if (ARTouchBeganUpdateEvent != null)
                 ARTouchBeganUpdateEvent(fakeTouch);         

@@ -8,19 +8,23 @@ public class TinyHandManager : Singleton<TinyHandManager>
 
     private List<GameObject> _tinyHandList;
     private TinyHandFactory _tinyHandFactory;
+    private int _tinyHandMax = 15;
 
     private void Awake()
     {
         _tinyHandList = new List<GameObject>();
         _tinyHandFactory = gameObject.AddComponent<TinyHandFactory>();
 
-        // Subscribe manager's function to touch delegate/event
         InputManager.Instance.ARTouchBeganUpdateEvent += OnTouchBegan;
     }
 
     public void InstantiateTinyHand(Vector3 pos)
     {
-        // Instantiatate from factory
+        if (_tinyHandList.Count > _tinyHandMax) {
+            Destroy(_tinyHandList[0]);
+            _tinyHandList.RemoveAt(0);
+        }
+
         var tinyHand = _tinyHandFactory.GetTinyHand();
         _tinyHandList.Add(tinyHand);
 
@@ -39,9 +43,6 @@ public class TinyHandManager : Singleton<TinyHandManager>
 
     public void OnTouchBegan(Touch touch)
     {
-
-        // Get screen positions and create point from it
-
 #if UNITY_EDITOR
         var ray = Camera.main.ScreenPointToRay(touch.position);
         RaycastHit hit;
